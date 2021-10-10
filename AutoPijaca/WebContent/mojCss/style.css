@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+h1{
+	color: #40ff00;
+	font-size: 42px;
+	font-family: "Comic Sans MS";
+	border: 3px solid red;
+	background-color: rgb(255, 255, 160);
+	text-align: center;
+	margin: 5px;
+	padding: 10px;
+}
+
+#glavniDiv{
+	background-color: #f2ccff;
+	width: 100%;
+	
+}
+
+.linkoviDiv{
+	display: inline;
+	background-color: #40ff00;
+	width: 50%;
+}
+
+.linkoviDiv>span{
+	color: blue;
+}
+
+#glavniDiv>p{
+	color: #40ff00;
+	font-size: 18px;
+	font-family: "Comic Sans MS";
+	text-align: center;
+}
