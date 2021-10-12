@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.RegistracijaService;
+
 /**
  * Servlet implementation class RegistracijaController
  */
@@ -23,19 +25,28 @@ public class RegistracijaController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Dobrodosli u doGet metodu...");
+		// nakacio sam se na servis
+		RegistracijaService servis = new RegistracijaService();
 		
+		// prihvatio parametre iz request-a
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String repeatedPassword = request.getParameter("repeatedPassword");
 		String tipUsera = request.getParameter("tipUsera");
 		
-		System.out.println("Parametri su: ");
-		System.out.println("User name: " + userName);
-		System.out.println("Password: " + password);
-		System.out.println("Repeated Password: " + repeatedPassword);
-		System.out.println("Tip Usera: " + tipUsera);
+		// zovem ispis parametara
+		servis.ispisiParametreServis(userName, password, repeatedPassword, tipUsera);
 		
+		// proveri password da li je u redu.
+		boolean daLiJePassOk = servis.daLiJePassDobar(password);
 		
+		if(daLiJePassOk) {
+			//sve ok, nastavljamo ka registraciji
+		}else {
+			// ako nije ok pass,vrati clientu odgovor
+			response.sendRedirect("html_stranice/wrong_password.html");
+		}
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
