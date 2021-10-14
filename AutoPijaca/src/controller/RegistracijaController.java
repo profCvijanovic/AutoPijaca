@@ -41,7 +41,14 @@ public class RegistracijaController extends HttpServlet {
 		boolean daLiJePassOk = servis.daLiJePassDobar(password);
 		
 		if(daLiJePassOk) {
-			//sve ok, nastavljamo ka registraciji
+			// pitam da li su repeated i obican pass isti
+			if(password.equals(repeatedPassword)) {
+				//sve ok, nastavljamo ka registraciji
+				
+			}else {
+				// ako nisu isti pss i rep. pass
+				response.sendRedirect("html_stranice/wrong_repeated_password.html");
+			}
 		}else {
 			// ako nije ok pass,vrati clientu odgovor
 			response.sendRedirect("html_stranice/wrong_password.html");
