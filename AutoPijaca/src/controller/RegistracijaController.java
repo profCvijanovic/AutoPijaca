@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
 import service.RegistracijaService;
 
 /**
@@ -34,6 +35,8 @@ public class RegistracijaController extends HttpServlet {
 		String repeatedPassword = request.getParameter("repeatedPassword");
 		String tipUsera = request.getParameter("tipUsera");
 		
+		// proveri da li su parametri null
+		
 		// zovem ispis parametara
 		servis.ispisiParametreServis(userName, password, repeatedPassword, tipUsera);
 		
@@ -43,7 +46,17 @@ public class RegistracijaController extends HttpServlet {
 		if(daLiJePassOk) {
 			// pitam da li su repeated i obican pass isti
 			if(password.equals(repeatedPassword)) {
-				//sve ok, nastavljamo ka registraciji
+				//popunjavamo usera
+				User user = servis.popuniUsera(userName, password, tipUsera);
+				// sacuvaj usera u bazu
+				boolean upisanUserUbazu = servis.upisiUsera(user);
+				if(upisanUserUbazu) {
+					// ako se upisao u bazu vrati ga na index
+					response.sendRedirect("index.html");
+				}else {
+					// ako se nije upisao u bazu, ponovo na registraciju
+					response.sendRedirect("html_stranice/registracija.html");
+				}
 				
 			}else {
 				// ako nisu isti pss i rep. pass
