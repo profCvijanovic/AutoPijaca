@@ -48,6 +48,17 @@ public class Validacija {
 		}
 			
 	}
+
+	public boolean validirajUseriPass(String userName, String password) {
+		
+		if((userName == null || userName.isEmpty()) || (password == null || password.isEmpty())) {
+			System.out.println("User ili pass su prazni ili null!");
+			return false;
+		}else {
+			System.out.println("User i pass nisu prazni ni null...");
+			return true;
+		}		
+	}
 	
 	
 	

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
+import model.UserType;
 import service.LoginService;
 
 /**
@@ -26,8 +28,29 @@ public class LoginController extends HttpServlet {
 		servis.ispisiParametre(userName, password);
 		
 		// validacija: user i pass moraju biti popunjeni
+		boolean daLiSuUseriPassPrazni= servis.validirajUseriPass(userName, password);
+		if(!daLiSuUseriPassPrazni) {
+			response.sendRedirect("html_stranice/login_fail.html");
+		}
 		// pretrazi u bazi da li postoji user sa ovim username-om i password-om
-		// ako user postoji vrati usera i preusmeri ga na njegovu stranu
+		User user = servis.vratiUseraPoUserNameiPassword(userName, password);
+		if(user == null) {
+			response.sendRedirect("html_stranice/login_fail.html");
+		}else {
+			// ako user postoji vrati usera i preusmeri ga na njegovu stranu
+			
+			if(user.getUserType().equals(UserType.BUYER)) {
+				//prebaci ga na stranicu za kupca
+				response.sendRedirect("jsp/buyer.jsp");
+			}else if(user.getUserType().equals(UserType.SELLER)) {
+				//prebaci ga na stranicu prodavac
+				response.sendRedirect("jsp/seller.jsp");
+			}else {
+				// prebaci ga na admin stranu
+				response.sendRedirect("jsp/admin.jsp");
+			}
+		}
+		
 		
 		
 	}
