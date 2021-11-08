@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import model.User;
+import model.UserDetails;
 
 public class RegistracijaLoginDao {
 	
@@ -16,7 +17,12 @@ public class RegistracijaLoginDao {
 		Session session = sf.openSession();
 			session.beginTransaction();		
 			try {
-				session.save(user);		
+				session.save(user);	
+				//napravi red i u UserDetails
+				UserDetails details = new UserDetails();
+				details.setUser(user);
+				session.save(details);
+				
 				session.getTransaction().commit();
 				System.out.println("User ciji je userName: " + user.getUserName() + " je upisan u bazu");
 				return true;
