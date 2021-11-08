@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.User;
 import model.UserType;
@@ -37,8 +38,12 @@ public class LoginController extends HttpServlet {
 		if(user == null) {
 			response.sendRedirect("html_stranice/login_fail.html");
 		}else {
-			// ako user postoji vrati usera i preusmeri ga na njegovu stranu
 			
+			// otvori sesiju
+			HttpSession session = request.getSession();
+			// ubaci usera u sesiju
+			session.setAttribute("user", user);
+			// ako user postoji vrati usera i preusmeri ga na njegovu stranu
 			if(user.getUserType().equals(UserType.BUYER)) {
 				//prebaci ga na stranicu za kupca
 				response.sendRedirect("jsp/buyer.jsp");
