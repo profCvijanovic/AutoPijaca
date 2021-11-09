@@ -25,4 +25,18 @@ public class CommonMethods {
 		System.out.println("Password: " + password);
 	}
 
+	public UserType vratiUserType(String userType) {
+		
+		UserType type = null;
+		
+		if(userType.equals("buyer")) {
+			type = UserType.BUYER;
+		}else if(userType.equals("seller")) {
+			type = UserType.SELLER;
+		}
+		
+		return type;
+		
+	}
+
 }
