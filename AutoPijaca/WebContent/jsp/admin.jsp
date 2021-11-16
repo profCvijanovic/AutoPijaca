@@ -14,17 +14,27 @@
 
 	<h1>Dobrodosao ${user.userName}</h1>
 
-	<form action="../AdminPrikaziController" method="get">
-		Odaberite sta zelite da vidite: 
-		<select name="userType" id="users">
+	<label for="prikaziUsereForma">Prikazi usere:</label>
+	<form id= "prikaziUsereForma" action="../AdminPrikaziController" method="get">
+		Odaberite sta zelite da vidite: <select name="userType" id="users">
 			<option value="seller">Prodavce</option>
 			<option value="buyer">Kupce</option>
 			<option value="all">Sve</option>
-		</select>
-		
-		<input type="submit" value="PRIKAZI">
+		</select> <input type="submit" value="PRIKAZI">
 
 	</form>
+
+	<br>
+	<br>
+	<label for="dodajBalanceForma">Dodaj Balance:</label>
+	<form id = "dodajBalanceForma" action="../DodajBalanceController" method="get" >
+
+		User name:<input type="text" name="userName">
+		Balance: <input type="text" name="balance">
+		<input type="submit" value="DODAJ">
+
+	</form>
+
 
 
 </body>

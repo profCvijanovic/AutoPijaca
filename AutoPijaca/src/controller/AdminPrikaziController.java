@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,13 +34,14 @@ public class AdminPrikaziController extends HttpServlet {
 		List<User> users = servis.vratiUserePoTipu(type);
 		
 		if(users !=null && !users.isEmpty()) {
-			for(User u: users) {
-				System.out.println("Id: " +  u.getIdUser());
-				System.out.println("User name: " +  u.getUserName());
-				System.out.println("Pass: " +  u.getPassword());
-				System.out.println("Type: " +  u.getUserType());
-				
-			}
+			// listu usera pakujem u request object
+			request.setAttribute("users", users);
+			// radim redirection postojeceg requesta na stranu prikaziUsere.jsp
+			RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/prikaziUsere.jsp");
+			// spakuj request u response
+			dispatcher.forward(request, response);
+		}else {
+			response.sendRedirect("jsp/admin.jsp");
 		}
 		
 	}
