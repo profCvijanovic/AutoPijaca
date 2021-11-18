@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
+import model.UserDetails;
 import service.EditProfileService;
 
 /**
@@ -38,8 +40,22 @@ public class EditProfileController extends HttpServlet {
 		System.out.println("street: " + street);
 		System.out.println("idUser: " + idUser);
 		
-		
-		
+		//1. Pronadji u bazi UserDetails ciji je user sa prihvacenim idUser
+		User user = servis.vratiUseraPoId(idUser);
+		UserDetails details = servis.vratiUserDetailsPoUseru(user);
+		// ako ne nadje userdetails da vrati gresku
+		if(details == null) {
+			response.sendRedirect("html_stranice/noUserDetailsFound.html");
+		}else {
+			//2. Setuj UserDetails i sacuvaj u bazi izmene
+			boolean editujUserDetails = servis.editujUserDetails(firstName, lastName, phone, email, country, city, street, details);
+			if(editujUserDetails) {
+				response.sendRedirect("jsp/seller.jsp");
+			}else {
+				response.sendRedirect("html_stranice/noUserDetailsFound.html");
+			}
+		}
+
 	}
 
 }

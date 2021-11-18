@@ -100,14 +100,14 @@ public class AdminDao {
 			details = (UserDetails) query.getSingleResult();
 
 			session.getTransaction().commit();
-			System.out.println("Postoji user details sa userName-om " + details.getIdUserDetails());
+			System.out.println("Postoji user details sa id " + details.getIdUserDetails());
 			return details;
 
 		} catch (NonUniqueResultException e) {
-			System.out.println("Ima vise usera sa ovim user name-om...");
+			System.out.println("Ima vise usera sa ovim id...");
 			return null;
 		} catch (NoResultException e) {
-			System.out.println("Ne postoji user details sa ovim user name-om...");
+			System.out.println("Ne postoji user details sa ovim id...");
 			return null;
 		} catch (Exception e) {
 			session.getTransaction().rollback();
@@ -151,5 +151,33 @@ public class AdminDao {
 			session.close();
 		}
 	}
+	
+	public User vratiUseraPoId(String userId) {
+		User user = new User();
+		
+		int idUser = Integer.parseInt(userId);
+		
+		Session session = sf.openSession();
+		session.beginTransaction();
+		try {
+			user = session.get(User.class, idUser);
+			session.getTransaction().commit();
+			System.out.println("Postoji user sa id " + idUser);
+			return user;
+
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			System.out.println("Nesto je puklo u vratiUseraPoId...");
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+
+	}
+	
+	
+	
+	
 
 }
