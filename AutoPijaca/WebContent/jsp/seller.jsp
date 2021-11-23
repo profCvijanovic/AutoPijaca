@@ -17,6 +17,17 @@
 		<input type="hidden" name = "idUser" value="${user.idUser}">
 		<input type="submit" value = "view profile"/>
 	</form>
+	
+	
+	<form action = "../AddCarController" method="get">
+		<input type="hidden" name = "idUser" value="${user.idUser}"><br>
+		Manufacturer: <input type="text" name="manufacturer"><br>
+		Model: <input type="text" name="model"><br>
+		Price: <input type="text" name="price"><br>
+		Year: <input type="text" name="year"><br>
+		Register: <input type="checkbox" name="isRegister"><br>
+		<input type="submit" value = "ADD CAR">
+	</form>
 
 </body>
 </html>
