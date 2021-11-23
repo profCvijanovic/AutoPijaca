@@ -13,6 +13,10 @@
 	<h1>Dobrodosao prodavac ${user.userName}</h1>
 	
 	<a href = "editProfile.jsp">edit profile</a>
+	<form action = "../ProfileController" method="post">
+		<input type="hidden" name = "idUser" value="${user.idUser}">
+		<input type="submit" value = "view profile"/>
+	</form>
 
 </body>
 </html>
