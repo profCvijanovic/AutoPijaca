@@ -33,3 +33,31 @@ h1{
 	font-family: "Comic Sans MS";
 	text-align: center;
 }
+
+.dodajBalanceAdmin{
+	margin: 10px;
+	padding: 5px;
+	border: 2px solid #34f4f7;
+	background-color: #bbeced;
+	width: 100%;
+}
+
+.prviDivAdmin{
+	background-color: #c7d1d1;
+	height: 500px;
+}
+
+.slikaAdmin{
+	margin-top: 15px;
+	margin-left: 100px;
+	padding: 20px;
+	align-content: center;
+}
+
+.nasloviAdmin{
+	margin-left: 30px;
+	font-size: 18px;
+	font-family: "Comic Sans MS";
+	text-align: center;
+	color: #a174a3;
+}
