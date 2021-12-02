@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.User;
 import model.UserDetails;
+import model.UserType;
 import service.EditProfileService;
 
 /**
@@ -30,15 +31,7 @@ public class EditProfileController extends HttpServlet {
 		String city = request.getParameter("city");
 		String street = request.getParameter("street");
 		String idUser = request.getParameter("idUser");
-		
-		System.out.println("First name: " + firstName);
-		System.out.println("lastName: " + lastName);
-		System.out.println("phone: " + phone);
-		System.out.println("email: " + email);
-		System.out.println("country: " + country);
-		System.out.println("city: " + city);
-		System.out.println("street: " + street);
-		System.out.println("idUser: " + idUser);
+	
 		
 		//1. Pronadji u bazi UserDetails ciji je user sa prihvacenim idUser
 		User user = servis.vratiUseraPoId(idUser);
@@ -50,7 +43,15 @@ public class EditProfileController extends HttpServlet {
 			//2. Setuj UserDetails i sacuvaj u bazi izmene
 			boolean editujUserDetails = servis.editujUserDetails(firstName, lastName, phone, email, country, city, street, details);
 			if(editujUserDetails) {
-				response.sendRedirect("jsp/seller.jsp");
+				if(user.getUserType().equals(UserType.SELLER)) {
+					response.sendRedirect("jsp/seller.jsp");
+					
+				}else if(user.getUserType().equals(UserType.BUYER)) {
+					response.sendRedirect("jsp/buyer.jsp");
+				}else {
+					response.sendRedirect("jsp/admin.jsp");
+				}
+				
 			}else {
 				response.sendRedirect("html_stranice/noUserDetailsFound.html");
 			}

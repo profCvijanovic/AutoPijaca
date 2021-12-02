@@ -12,9 +12,13 @@
 	<jsp:useBean id="details" scope="request" class="model.UserDetails"></jsp:useBean>
 	<h1>User ${details.firstName} ${details.lastName} profile</h1>
 
-	<a href="jsp/seller.jsp">back to SELLER page</a>
-	<br>
-	<br>
+<c:if test = "${user.userType eq 'BUYER'}">
+	<a href = "jsp/buyer.jsp">back to BUYER page</a> <br><br>
+</c:if>
+
+<c:if test = "${user.userType eq 'SELLER'}">
+	<a href = "jsp/seller.jsp">back to SELLER page</a> <br><br>
+</c:if>
 	
 	<img src = "profilneSlike/${details.firstName}.jfif">
 
