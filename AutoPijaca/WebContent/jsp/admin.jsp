@@ -26,6 +26,8 @@
 		<jsp:useBean id="user" scope="session" class="model.User"></jsp:useBean>
 
 		<h1>Dobrodošao ${user.userName}</h1>
+		
+		
 		<div class="row">
 			<div class="col">
 				<label for="prikaziUsereForma" class="nasloviAdmin">Prikazi usere:</label>
@@ -70,6 +72,10 @@
 			</div>
 			<div class="col">
 				<img src="../slike/adminPage.jfif" / class="slikaAdmin">
+			</div>
+			
+			<div class="col">
+				<a href = "logout.jsp">LOGOUT</a>
 			</div>
 		</div>
 		<!-- Optional JavaScript; choose one of the two! -->

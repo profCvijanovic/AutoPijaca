@@ -11,6 +11,8 @@
 <body>
 	<jsp:useBean id="user" scope="session" class="model.User"></jsp:useBean>
 	<h1>Dobrodošao kupac ${user.userName}</h1>
+	
+	<a href = "logout.jsp">LOGOUT</a>
 
 	<a href="editProfile.jsp">edit profile</a>
 	<form action="../ProfileController" method="post">

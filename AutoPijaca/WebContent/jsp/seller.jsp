@@ -12,6 +12,8 @@
 	<jsp:useBean id="user" scope="session" class="model.User"></jsp:useBean>
 	<h1>Dobrodosao prodavac ${user.userName}</h1>
 	
+	<a href = "logout.jsp">LOGOUT</a>
+	
 	<a href = "editProfile.jsp">edit profile</a>
 	<form action = "../ProfileController" method="post">
 		<input type="hidden" name = "idUser" value="${user.idUser}">
