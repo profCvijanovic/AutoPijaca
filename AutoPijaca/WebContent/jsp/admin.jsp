@@ -27,7 +27,7 @@
 
 		<h1>Dobrodošao ${user.userName}</h1>
 		
-		
+		<a href = "logout.jsp" class="logoutLink">LOGOUT</a>
 		<div class="row">
 			<div class="col">
 				<label for="prikaziUsereForma" class="nasloviAdmin">Prikazi usere:</label>
@@ -36,7 +36,7 @@
 					<select name="userType" id="users"
 						class="form-select form-select-sm"
 						aria-label=".form-select-sm example">
-						<option selected>Open this select menu</option>
+						<option selected>Useri</option>
 						<option value="seller">Prodavce</option>
 						<option value="buyer">Kupce</option>
 						<option value="all">Sve</option>
@@ -73,10 +73,7 @@
 			<div class="col">
 				<img src="../slike/adminPage.jfif" / class="slikaAdmin">
 			</div>
-			
-			<div class="col">
-				<a href = "logout.jsp">LOGOUT</a>
-			</div>
+
 		</div>
 		<!-- Optional JavaScript; choose one of the two! -->
 

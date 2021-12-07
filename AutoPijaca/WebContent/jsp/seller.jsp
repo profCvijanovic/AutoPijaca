@@ -12,7 +12,7 @@
 	<jsp:useBean id="user" scope="session" class="model.User"></jsp:useBean>
 	<h1>Dobrodosao prodavac ${user.userName}</h1>
 	
-	<a href = "logout.jsp">LOGOUT</a>
+	<a href = "logout.jsp" class="logoutLink">LOGOUT</a>
 	
 	<a href = "editProfile.jsp">edit profile</a>
 	<form action = "../ProfileController" method="post">

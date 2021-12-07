@@ -39,7 +39,7 @@ h1{
 	padding: 5px;
 	border: 2px solid #34f4f7;
 	background-color: #bbeced;
-	width: 100%;
+	width: 90%;
 }
 
 .prviDivAdmin{
@@ -60,4 +60,12 @@ h1{
 	font-family: "Comic Sans MS";
 	text-align: center;
 	color: #a174a3;
+}
+
+.logoutLink{
+	margin-left: 10px;
+	font-size: 14px;
+	font-family: "Comic Sans MS";
+	font-weight: bold;
+	color: #214ded;
 }

@@ -3,12 +3,15 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import model.Car;
+import model.User;
 
 public class ChosenCarsDao {
 	
@@ -120,5 +123,28 @@ public class ChosenCarsDao {
 		
 	
 	}
+
+	public Car vratiCarPoId(String idCar) {
+		
+			Car car = new Car();
+
+			Session session = sf.openSession();
+			session.beginTransaction();
+			try {
+				car = session.get(Car.class, Integer.parseInt(idCar));
+				session.getTransaction().commit();
+				return car;
+			} catch (Exception e) {
+				session.getTransaction().rollback();
+				System.out.println("Nesto je puklo u vratiCarPoId...");
+				e.printStackTrace();
+				return null;
+			} finally {
+				session.close();
+			}
+	}
+	
+	
+	
 
 }
