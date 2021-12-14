@@ -43,38 +43,38 @@ public class ChosenCarsDao {
 		Session session = sf.openSession();
 		session.beginTransaction();
 		try {
-			String hql = "from Car" + 
-						 " where 1=1";
+			String hql = " from Car car" + 
+						 " where 1 = 1 ";
 			
 			if(manufacturer != null && !manufacturer.equals("")) {
-				hql += " and manufacturer = :manufacturer";
+				hql += " and car.manufacturer = :manufacturer";
 			}
 			
 			if(model != null && !model.equals("")) {
-				hql += " and model = :modell";
+				hql += " and car.model = :modell";
 			}
 			
 			if(priceFrom != null) {
-				hql += " and price >= :priceFrom";
+				hql += " and car.price >= :priceFrom";
 			}
 			
 			if(priceTo != null) {
-				hql += " and price <= :priceTo";
+				hql += " and car.price <= :priceTo";
 			}
 			
 			if(!yearFrom.equals("0")) {
-				hql += " and year >= :yearFrom";
+				hql += " and car.year >= :yearFrom";
 			}
 			
 			if(!yearTo.equals("0")) {
-				hql += " and year <= :yearTo";
+				hql += " and car.year <= :yearTo";
 			}
 			
 			if(isRegister != null) {
 				if(isRegister) {
-					hql += " and isRegister = true";
+					hql += " and car.isRegister = true";
 				}else {
-					hql += " and isRegister = false";
+					hql += " and car.isRegister = false";
 				}				
 			}
 			
@@ -105,9 +105,8 @@ public class ChosenCarsDao {
 			if(!yearTo.equals("0")) {
 				query.setParameter("yearTo", yearTo);
 			}
-			
-			listaAutomobila = (List<Car>)query.getResultList();
-			
+			listaAutomobila = query.getResultList();
+		
 			session.getTransaction().commit();
 			System.out.println("Vracam listu automobila, koja ima " + listaAutomobila.size() + " redova");
 			

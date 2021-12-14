@@ -1,6 +1,8 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -8,7 +10,6 @@ import org.hibernate.SessionFactory;
 
 import model.Car;
 import model.SaveTransaction;
-import model.User;
 import model.UserDetails;
 
 public class BuyCarDao {
@@ -45,20 +46,41 @@ public class BuyCarDao {
 		Session session = sf.openSession();
 		session.beginTransaction();
 		try {
+			
+			System.out.println("Car: " + car.getModel());
+			System.out.println("Kupac lista automobila : " + kupac.getCars().size());
+			System.out.println("Prodavac lista automobila : " + prodavac.getCars().size());
+			
 			car.setUserDetails(kupac);
 			kupac.getCars().add(car);
 			
-			for(Car c: prodavac.getCars()) {
+			/*for(Car c: prodavac.getCars()) {
 				if(c.getIdCar() == car.getIdCar()) {
 					prodavac.getCars().remove(c);
 					System.out.println("Obrisan automobil: " + c.getManufacturer() + " " + c.getModel());
 				}
+			}*/
+			List<Car> novaListaProdavca = new ArrayList<Car>();
+			
+			for(Car c: prodavac.getCars()) {
+				
+				if(c.getIdCar() != car.getIdCar()) {
+					novaListaProdavca.add(c);
+				}
 			}
 			
-			prodavac.setBalance(prodavac.getBalance() + car.getPrice());
-				System.out.println("Novi balance prodavca je: " + prodavac.getBalance());
+			prodavac.setCars(novaListaProdavca);
+			
+			if(prodavac.getBalance() == null) {
+				prodavac.setBalance(car.getPrice());
+			}else {
+				prodavac.setBalance(prodavac.getBalance() + car.getPrice());
+			}
+			
+			System.out.println("Novi balance prodavca je: " + prodavac.getBalance());
+			
 			kupac.setBalance(kupac.getBalance() - car.getPrice());
-				System.out.println("Novi balance kupca je: " + kupac.getBalance());
+			System.out.println("Novi balance kupca je: " + kupac.getBalance());
 				
 			session.update(car);
 			session.update(prodavac);
